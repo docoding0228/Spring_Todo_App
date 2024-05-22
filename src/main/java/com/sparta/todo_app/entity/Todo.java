@@ -35,6 +35,10 @@ public class Todo {
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime createdAt;
 
+//    @CreatedDate
+//    @Column(updatable = false)
+//    private LocalDateTime createdAt;
+
     public Todo(TodoRequestDto requestDto) {
         this.comment_content = requestDto.getComment_content();
         this.user_id = requestDto.getUser_id();

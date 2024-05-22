@@ -26,10 +26,9 @@ public class TodoController {
     @PostMapping("/post")
     @Operation(summary = "게시글 작성")
     @Parameters({
-            @Parameter(name = "title", description = "제목(1~200자)", example = "제목입니다."),
-            @Parameter(name = "contents", description = "내용(1~500자)", example = "내용입니다."),
-            @Parameter(name = "charge", description = "담당자(email)", example = "damdang@email.com"),
-            @Parameter(name = "password", description = "비밀번호(1~20자)", example = "1234"),
+            @Parameter(name = "comment_content", description = "내용", example = "제목입니다."),
+            @Parameter(name = "user_id", description = "사용자 ID", example = "사용자 ID 입니다."),
+            @Parameter(name = "todo_id", description = "일정 아이디", example = "일정 아이디 입니다.")
     })
     public TodoResponseDto createTodo(@Valid @RequestBody TodoRequestDto requestDto) {
         return todoService.createTodo(requestDto);
