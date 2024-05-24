@@ -26,8 +26,5 @@ public class ScheduleRequestDto {
     @Size(min = 1, max = 20)
     private String password;
 
-//    public ScheduleRequestDto() {}
-//    // 잭슨에 필요해서 만듬.
-
 }
 
