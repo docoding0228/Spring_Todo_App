@@ -40,9 +40,26 @@ public class TodoController {
         return todoService.getTodos();
     }
 
+
+    //    (1)
+//    @PutMapping("/todo/{id}")
+//    @Operation(summary = "일정 수정")
+//    public TodoResponseDto updateTodo(@PathVariable Long id, @RequestBody TodoRequestDto requestDto) {
+//        return todoService.updateTodo(id, requestDto);
+//    }
+
+
+//    @PutMapping("/todo")
+//    @Operation(summary = "일정 수정")
+//    public TodoResponseDto updateTodo(@RequestParam Long id, @Valid @RequestBody TodoRequestDto requestDto) {
+//        return todoService.updateTodo(id, requestDto);
+//    }
+
+    //      (2)
+    // @PutMapping("/todo/{id}") -> @PutMapping("/todo") // @PathVariable -> @RequestParam
     @PutMapping("/todo")
     @Operation(summary = "일정 수정")
-    public TodoResponseDto updateTodo(@RequestParam Long id, @Valid @RequestBody TodoRequestDto requestDto) {
+    public TodoResponseDto updateTodo(@RequestParam Long id, @RequestBody TodoRequestDto requestDto) {
         return todoService.updateTodo(id, requestDto);
     }
 

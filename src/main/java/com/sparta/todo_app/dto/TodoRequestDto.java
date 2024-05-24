@@ -16,4 +16,9 @@ public class TodoRequestDto {
 
     @NotNull
     private Long todo_id;
+
+    // (1)
+    public TodoRequestDto() {
+        // 기본 생성자
+    }
 }

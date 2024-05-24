@@ -35,11 +35,25 @@ public class TodoService {
                 .collect(Collectors.toList());
     }
 
+
+      // (1)
+//    @Transactional
+//    public TodoResponseDto updateTodo(Long id, TodoRequestDto requestDto) {
+//        Todo todo = findTodoById(id);
+//        todo.updateComment(requestDto.getComment_content());
+//        return new TodoResponseDto(todoRepository.save(todo));
+//    }
+
+    // (2)
     @Transactional
     public TodoResponseDto updateTodo(Long id, TodoRequestDto requestDto) {
         Todo todo = findTodoById(id);
-        todo.update(requestDto);
-        return new TodoResponseDto(todo);
+
+        if (requestDto.getComment_content() != null) {
+            todo.setComment_content(requestDto.getComment_content());
+        }
+
+        return new TodoResponseDto(todoRepository.save(todo));
     }
 
     @Transactional
@@ -53,5 +67,4 @@ public class TodoService {
         return todoRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("해당 일정을 찾을 수 없습니다."));
     }
-
 }

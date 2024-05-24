@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
@@ -20,6 +21,7 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Setter
     @Column(name = "comment_content", nullable = false)
     private String comment_content;
 
@@ -40,8 +42,17 @@ public class Todo {
         this.todo_id = requestDto.getTodo_id();
     }
 
-    public Todo update(TodoRequestDto todoRequestDto) {
-        this.comment_content = todoRequestDto.getComment_content();
-        return this;
-    }
+          // (1)
+//        public void updateComment(String comment_content) {
+//        if (comment_content != null) {
+//            this.comment_content = comment_content;
+//        }
+//    }
+
+//    (2)
+//    public Todo update(TodoRequestDto todoRequestDto) {
+//        this.comment_content = todoRequestDto.getComment_content();
+//        return this;
+//    }
+
 }
