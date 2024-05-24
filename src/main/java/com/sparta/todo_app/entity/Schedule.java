@@ -50,5 +50,6 @@ public class Schedule {
         this.contents = scheduleRequestDto.getContents();
         this.charge = scheduleRequestDto.getCharge();
         return this;
+
     }
 }
