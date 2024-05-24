@@ -53,4 +53,5 @@ public class TodoService {
         return todoRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("해당 일정을 찾을 수 없습니다."));
     }
+
 }
