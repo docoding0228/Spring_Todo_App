@@ -1,18 +1,22 @@
 package com.sparta.todo_app.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sparta.todo_app.entity.Todo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
-    @Getter
+@Getter
     @AllArgsConstructor
     public class TodoResponseDto {
+
         private Long id;
         private String comment_content;
         private String user_id;
-        private String todo_id;
+        private Long todo_id;
+
+        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         private LocalDateTime createdAt;
 
         public TodoResponseDto(Todo todo) {

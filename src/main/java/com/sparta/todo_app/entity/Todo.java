@@ -28,16 +28,11 @@ public class Todo {
     private String user_id;
 
     @Column(name = "todo_id", nullable = false)
-    private String todo_id;
+    private Long todo_id;
 
     @CreatedDate
     @Column(updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime createdAt;
-
-//    @CreatedDate
-//    @Column(updatable = false)
-//    private LocalDateTime createdAt;
 
     public Todo(TodoRequestDto requestDto) {
         this.comment_content = requestDto.getComment_content();

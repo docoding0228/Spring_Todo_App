@@ -15,6 +15,6 @@ public class TodoRequestDto {
     private String user_id;
 
     @NotNull
-    private String todo_id;
+    private Long todo_id;
 
 }

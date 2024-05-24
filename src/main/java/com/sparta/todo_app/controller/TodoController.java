@@ -4,33 +4,51 @@ import com.sparta.todo_app.dto.TodoRequestDto;
 import com.sparta.todo_app.dto.TodoResponseDto;
 import com.sparta.todo_app.service.TodoService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
 @Tag(name = "Todo Management", description = "일정 관리 페이지 API")
 public class TodoController {
 
-    private TodoService todoService;
+    private final TodoService todoService;
 
     @Autowired
-    public void TodoController(TodoService todoService) {
+    public TodoController(TodoService todoService) {
         this.todoService = todoService;
     }
 
     @PostMapping("/post")
-    @Operation(summary = "게시글 작성")
-    @Parameters({
-            @Parameter(name = "comment_content", description = "내용", example = "제목입니다."),
-            @Parameter(name = "user_id", description = "사용자 ID", example = "사용자 ID 입니다."),
-            @Parameter(name = "todo_id", description = "일정 아이디", example = "일정 아이디 입니다.")
-    })
     public TodoResponseDto createTodo(@Valid @RequestBody TodoRequestDto requestDto) {
         return todoService.createTodo(requestDto);
+    }
+
+    @GetMapping("/todo")
+    @Operation(summary = "선택한 일정 조회")
+    public TodoResponseDto getTodo(@RequestParam Long id) {
+        return todoService.getTodo(id);
+    }
+
+    @GetMapping("/todos")
+    @Operation(summary = "일정 목록 조회")
+    public List<TodoResponseDto> getTodoList() {
+        return todoService.getTodos();
+    }
+
+    @PutMapping("/todo")
+    @Operation(summary = "일정 수정")
+    public TodoResponseDto updateTodo(@RequestParam Long id, @Valid @RequestBody TodoRequestDto requestDto) {
+        return todoService.updateTodo(id, requestDto);
+    }
+
+    @DeleteMapping("/todo")
+    @Operation(summary = "일정 삭제")
+    public Long deleteTodo(@RequestParam Long id) {
+        return todoService.deleteTodo(id);
     }
 }
