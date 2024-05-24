@@ -29,25 +29,25 @@ public class TodoController {
     }
 
     @GetMapping("/todo")
-    @Operation(summary = "선택한 일정 조회")
+    @Operation(summary = "선택한 댓글 조회")
     public TodoResponseDto getTodo(@RequestParam Long id) {
         return todoService.getTodo(id);
     }
 
     @GetMapping("/todos")
-    @Operation(summary = "일정 목록 조회")
+    @Operation(summary = "댓글 목록 조회")
     public List<TodoResponseDto> getTodoList() {
         return todoService.getTodos();
     }
 
     @PutMapping("/todo")
-    @Operation(summary = "일정 수정")
+    @Operation(summary = "댓글 수정")
     public TodoResponseDto updateTodo(@RequestParam Long id, @Valid @RequestBody TodoRequestDto requestDto) {
         return todoService.updateTodo(id, requestDto);
     }
 
     @DeleteMapping("/todo")
-    @Operation(summary = "일정 삭제")
+    @Operation(summary = "댓글 삭제")
     public Long deleteTodo(@RequestParam Long id) {
         return todoService.deleteTodo(id);
     }
