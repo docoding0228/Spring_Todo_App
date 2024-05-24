@@ -4,13 +4,8 @@ import com.sparta.todo_app.dto.ScheduleRequestDto;
 import com.sparta.todo_app.dto.ScheduleResponseDto;
 import com.sparta.todo_app.service.ScheduleService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -59,15 +54,5 @@ public class ScheduleController {
 
     public Long deleteSchedule(@RequestParam Long id, @RequestBody Map<String, String> password) {
         return scheduleService.deleteSchedule(id, password.get("password"));
-    }
-
-    @ExceptionHandler
-    private ResponseEntity<String> handleException(IllegalArgumentException e) {
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler
-    private ResponseEntity<String> handleException(MethodArgumentNotValidException e) {
-        return new ResponseEntity<>(Objects.requireNonNull(e.getFieldError()).getDefaultMessage(), HttpStatus.BAD_REQUEST);
     }
 }
