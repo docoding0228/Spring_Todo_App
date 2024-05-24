@@ -23,34 +23,27 @@ public class ScheduleController {
     }
 
     @PostMapping("/schedule")
-    @Operation(summary = "일정 작성")
 
     public ScheduleResponseDto createSchedule(@Valid @RequestBody ScheduleRequestDto requestDto) {
         return scheduleService.createSchedule(requestDto);
     }
 
     @GetMapping("/schedule")
-    @Operation(summary = "선택한 일정 조회")
     public ScheduleResponseDto getSchedule(@RequestParam Long id) {
         return scheduleService.getSchedule(id);
     }
 
     @GetMapping("/schedules")
-    @Operation(summary = "일정 목록 조회")
     public List<ScheduleResponseDto> getSchedules() {
         return scheduleService.getSchedules();
     }
 
     @PutMapping("/schedule")
-    @Operation(summary = "선택한 일정 수정")
-
     public ScheduleResponseDto updateSchedule(@RequestParam Long id, @Valid @RequestBody ScheduleRequestDto requestDto) {
         return scheduleService.updateSchedule(id, requestDto);
     }
 
     @DeleteMapping("/schedule")
-    @Operation(summary = "선택한 일정 삭제")
-
     public Long deleteSchedule(@RequestParam Long id, @RequestBody Map<String, String> password) {
         return scheduleService.deleteSchedule(id, password.get("password"));
     }
