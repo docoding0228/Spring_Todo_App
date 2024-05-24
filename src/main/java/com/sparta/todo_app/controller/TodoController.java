@@ -41,7 +41,7 @@ public class TodoController {
     }
 
     @PutMapping("/todo")
-    @Operation(summary = "댓글 수정")
+    @Operation(summary = "일정 수정")
     public TodoResponseDto updateTodo(@RequestParam Long id, @Valid @RequestBody TodoRequestDto requestDto) {
         return todoService.updateTodo(id, requestDto);
     }

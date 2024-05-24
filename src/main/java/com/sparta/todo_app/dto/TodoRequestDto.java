@@ -17,5 +17,4 @@ public class TodoRequestDto {
     @NotNull
     private Long todo_id;
 
-
 }

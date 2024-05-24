@@ -26,5 +26,4 @@ import java.time.LocalDateTime;
             this.todo_id = todo.getTodo_id();
             this.createdAt = todo.getCreatedAt();
         }
-
     }
