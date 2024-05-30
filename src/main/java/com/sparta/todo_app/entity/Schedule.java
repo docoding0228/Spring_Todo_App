@@ -2,7 +2,6 @@ package com.sparta.todo_app.entity;
 
 import com.sparta.todo_app.dto.ScheduleRequestDto;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -13,10 +12,9 @@ import java.time.LocalDateTime;
 
 @Getter
 @Entity
-@Table(name = "schedule")
+@Table(name = "schedules")
 @EntityListeners(AuditingEntityListener.class)
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor // 기본생성자 생성
 public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

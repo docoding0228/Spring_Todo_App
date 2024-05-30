@@ -1,6 +1,6 @@
 package com.sparta.todo_app.entity;
 
-import com.sparta.todo_app.dto.TodoRequestDto;
+import com.sparta.todo_app.dto.CommentRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,11 +12,11 @@ import java.time.LocalDateTime;
 
 @Getter
 @Entity
-@Table(name = "todo")
+@Table(name = "comments")
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
 @AllArgsConstructor
-public class Todo {
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,7 +36,7 @@ public class Todo {
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime createdAt;
 
-    public Todo(TodoRequestDto requestDto) {
+    public Comment(CommentRequestDto requestDto) {
         this.comment_content = requestDto.getComment_content();
         this.user_id = requestDto.getUser_id();
         this.todo_id = requestDto.getTodo_id();
