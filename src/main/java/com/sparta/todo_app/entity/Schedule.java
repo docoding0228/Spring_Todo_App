@@ -2,19 +2,23 @@ package com.sparta.todo_app.entity;
 
 import com.sparta.todo_app.dto.ScheduleRequestDto;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Getter
 @Entity
 @Table(name = "schedules")
 @EntityListeners(AuditingEntityListener.class)
-@NoArgsConstructor // 기본생성자 생성
+@NoArgsConstructor
+@AllArgsConstructor
 public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,8 +33,8 @@ public class Schedule {
     @Column(name = "charge", nullable = false)
     private String charge;
 
-    @Column(name = "password", nullable = false, length = 20)
-    private String password;
+    @Column(name = "username", nullable = false, length = 20)
+    private String username;
 
     @CreatedDate
     @Column(updatable = false)
@@ -41,13 +45,17 @@ public class Schedule {
         this.title = requestDto.getTitle();
         this.contents = requestDto.getContents();
         this.charge = requestDto.getCharge();
-        this.password = requestDto.getPassword();
+        this.username = requestDto.getUsername();
     }
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "schedule")
+    private List<Comment> comments = new ArrayList<>();
 
     public Schedule update(ScheduleRequestDto scheduleRequestDto) {
         this.title = scheduleRequestDto.getTitle();
         this.contents = scheduleRequestDto.getContents();
         this.charge = scheduleRequestDto.getCharge();
+        this.username = scheduleRequestDto.getUsername();
         return this;
     }
 }
