@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@Tag(name = "Todo Management", description = "일정 관리 페이지 API")
+@Tag(name = "Comment Management", description = "일정 관리 페이지 API")
 public class CommentController {
 
     private final CommentService commentService;
@@ -22,21 +22,21 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @PostMapping("/post")
-    public CommentResponseDto createTodo(@Valid @RequestBody CommentRequestDto requestDto) {
-        return commentService.createTodo(requestDto);
+
+    @PostMapping("/comments")
+    public CommentResponseDto createComment(@Valid @RequestBody CommentRequestDto requestDto) {
+        return commentService.createComment(requestDto);
     }
 
-    @GetMapping("/todo")
-    public CommentResponseDto getTodo(@RequestParam Long id) {
-        return commentService.getTodo(id);
+    @GetMapping("/comments")
+    public CommentResponseDto getComment(@RequestParam Long id) {
+        return commentService.getComment(id);
     }
 
-    @GetMapping("/todos")
+    @GetMapping("/commentss")
     public List<CommentResponseDto> getTodoList() {
-        return commentService.getTodos();
+        return commentService.getComments();
     }
-
 
     //    (1)
 //    @PutMapping("/todo/{id}")
@@ -45,21 +45,25 @@ public class CommentController {
 //    }
 
 
-//    @PutMapping("/todo")
-//    public TodoResponseDto updateTodo(@RequestParam Long id, @Valid @RequestBody TodoRequestDto requestDto) {
-//        return todoService.updateTodo(id, requestDto);
+//    @PutMapping("/comments")
+//    public CommentResponseDto updateComment(@RequestParam Long schedule, @Valid @RequestBody CommentRequestDto requestDto) {
+//        return commentService.updateComment(schedule, requestDto);
 //    }
+
+    @PutMapping("/comments/{scheduleId}/{commentId}")
+    public CommentResponseDto updateComment(@PathVariable Long scheduleId, @PathVariable Long commentId, @Valid @RequestBody CommentRequestDto requestDto) {
+        return commentService.updateComment(scheduleId, commentId, requestDto);
+    }
 
     //      (2)
     // @PutMapping("/todo/{id}") -> @PutMapping("/todo") // @PathVariable -> @RequestParam
-    @PutMapping("/todo")
-    public CommentResponseDto updateTodo(@RequestParam Long id, @RequestBody CommentRequestDto requestDto) {
-        return commentService.updateTodo(id, requestDto);
-    }
+//    @PutMapping("/todo")
+//    public CommentResponseDto updateTodo(@RequestParam Long id, @RequestBody CommentRequestDto requestDto) {
+//        return commentService.updateTodo(id, requestDto);
+//    }
 
-    @DeleteMapping("/todo")
+    @DeleteMapping("/comments")
     public Long deleteTodo(@RequestParam Long id) {
-        return commentService.deleteTodo(id);
+        return commentService.deleteComment(id);
     }
-
 }

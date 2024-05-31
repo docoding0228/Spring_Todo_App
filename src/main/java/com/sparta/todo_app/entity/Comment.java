@@ -1,6 +1,7 @@
 package com.sparta.todo_app.entity;
 
 import com.sparta.todo_app.dto.CommentRequestDto;
+import com.sparta.todo_app.dto.ScheduleRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,29 +18,36 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Comment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Setter
-    @Column(name = "comment_content", nullable = false)
-    private String comment_content;
+    @Column(name = "contents", nullable = false)
+    private String contents;
 
-    @Column(name = "user_id", nullable = false)
-    private String user_id;
+    @Column(name = "username")
+    private String username;
 
-    @Column(name = "todo_id", nullable = false)
-    private Long todo_id;
+    @ManyToOne
+    @JoinColumn(name = "schedule_id")
+    private Schedule schedule;
 
     @CreatedDate
     @Column(updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime createdAt;
 
-    public Comment(CommentRequestDto requestDto) {
-        this.comment_content = requestDto.getComment_content();
-        this.user_id = requestDto.getUser_id();
-        this.todo_id = requestDto.getTodo_id();
+    public Comment update(String contents) {
+        this.contents = contents;
+        return this;
+    }
+
+    public Comment(CommentRequestDto requestDto, Schedule schedule) {
+        this.contents = requestDto.getContents();
+        this.username = requestDto.getUsername();
+        this.schedule = schedule;
     }
 
           // (1)

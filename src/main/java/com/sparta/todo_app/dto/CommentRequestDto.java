@@ -1,24 +1,23 @@
 package com.sparta.todo_app.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
-@AllArgsConstructor
+@Setter
+//@AllArgsConstructor
 public class CommentRequestDto {
 
-    @NotNull
-    private String comment_content;
+    @NotBlank
+    @Size(min = 1, max = 500)
+    private String contents;
+
+    @NotBlank
+    private String username;
 
     @NotNull
-    private String user_id;
-
-    @NotNull
-    private Long todo_id;
-
-//    // (1)
-//    public TodoRequestDto() {
-//        // 기본 생성자
-//    }
+    private Long scheduleId;
 }
